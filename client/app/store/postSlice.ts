@@ -7,7 +7,7 @@ const initialState: PostsSatetType = {
 
 // Slice
 export const postSlice = createSlice({
-  name: "user",
+  name: "post",
   initialState,
   reducers: {
     setPosts: (state, action: PayloadAction<PostsDetails[]>) => {

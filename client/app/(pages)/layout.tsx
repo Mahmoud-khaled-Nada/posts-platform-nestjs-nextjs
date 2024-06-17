@@ -10,30 +10,27 @@ import { useRouter } from "next/navigation";
 
 const PagesLayout: FC<ChildrenType> = ({ children }) => {
   const router = useRouter();
-  const { authUser: user, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (user) {
-    return (
-      <>
-        <Header />
-        <Container>
-          <Row>
-            <Column size={4}>
-              <Sidebar />
-            </Column>
-            <Column size={7}>
-              <MainContent>{children}</MainContent>
-            </Column>
-          </Row>
-        </Container>
-      </>
-    );
-  }
+  if (!user) router.replace("/login");
 
-  router.replace('/login');
-  return null;
+  return (
+    <>
+      <Header />
+      <Container>
+        <Row>
+          <Column size={4}>
+            <Sidebar />
+          </Column>
+          <Column size={7}>
+            <MainContent>{children}</MainContent>
+          </Column>
+        </Row>
+      </Container>
+    </>
+  );
 };
 
 export default PagesLayout;

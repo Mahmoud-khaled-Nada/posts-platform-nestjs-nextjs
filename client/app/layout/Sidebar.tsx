@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { SidebarContainer, SidebarContent, SidebarTabs, SidebarTab, IconBadge } from "@/utils/styles";
 import SidebarTabsOptions from "./sidebar-tabs/SidebarTabsOptions";
-import { useAuthContext } from "@/utils/context/AuthContext";
 import { getNotificationQuery } from "@/services/queries";
 
 export const Sidebar: React.FC = () => {
@@ -18,7 +17,7 @@ export const Sidebar: React.FC = () => {
   }, []);
 
   const friendRequests = useSelector((state: RootState) => state.friendRequest.friendRequests);
-  const { user } = useAuthContext();
+  const { user } = useSelector((state:RootState) => state.user)
 
   const friendNotificationCount = useMemo(() => {
     if (friendRequests.length > 0 && friendRequests.length <= 10) {
@@ -31,7 +30,7 @@ export const Sidebar: React.FC = () => {
   }, [friendRequests]);
 
   // improve this before
-  const { data } = getNotificationQuery("friend-request");
+  const { data } = getNotificationQuery();
   return (
     <SidebarContainer>
       <SidebarContent>

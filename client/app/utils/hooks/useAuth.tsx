@@ -1,19 +1,21 @@
 import { useEffect } from "react";
 import { authUserQuery } from "@/services/queries";
-import { useAuthContext } from "../context/AuthContext";
+import { AppDispatch } from "@/store";
+import { setAuthUser } from "@/store/userSlice";
+import { useDispatch } from "react-redux";
 
 export function useAuth() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isLoading, isSuccess, data: user } = authUserQuery();
   const controller = new AbortController();
-  const { updateAuthUser } = useAuthContext();
-  const { isLoading, isSuccess, data: authUser } = authUserQuery();
 
   useEffect(() => {
-    if (isSuccess && authUser) updateAuthUser(authUser?.data)
+    if (isSuccess && user) dispatch(setAuthUser(user.data));
 
     return () => {
       controller.abort();
     };
-  }, [authUser]);
+  }, [user]);
 
-  return { authUser, isLoading };
+  return { user, isLoading };
 }

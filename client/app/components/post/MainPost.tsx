@@ -8,7 +8,6 @@ import { AppDispatch, RootState } from "@/store";
 import { FC, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import { SocketContext } from "@/utils/context/SocketContext";
-import { useAuthContext } from "@/utils/context/AuthContext";
 
 type Props = {
   isLoading: boolean;
@@ -17,7 +16,7 @@ type Props = {
 const MainPost: FC<Props> = ({ isLoading }) => {
   const dispatch = useDispatch<AppDispatch>();
   const socket = useContext(SocketContext);
-  const { user } = useAuthContext();
+  const { user } = useSelector((state:RootState) => state.user)
   const posts = useSelector((state: RootState) => state.posts.posts);
 
   useEffect(() => {

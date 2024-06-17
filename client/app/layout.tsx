@@ -7,7 +7,6 @@ import "./globals.css";
 import { ChildrenType } from "./utils/types";
 import AppProvider from "./AppProvider";
 import SocketProvider from "./utils/context/SocketContext";
-import { AuthProvider } from "./utils/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +20,7 @@ const RootLayout: FC<ChildrenType> = ({ children }) => {
     <html lang="en">
       <body className={`${inter.className} bg-white dark:bg-neutral-900`}>
         <SocketProvider>
-          <AuthProvider>
-            <AppProvider>{children}</AppProvider>
-          </AuthProvider>
+          <AppProvider>{children}</AppProvider>
         </SocketProvider>
       </body>
     </html>

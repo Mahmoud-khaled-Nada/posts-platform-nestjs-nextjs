@@ -30,8 +30,8 @@ export type AudioPostParam = {
   audioContent?: Blob;
 };
 
-export type LikeDetails = {
-  user: User;
+export type UserType = {
+  user: User | null;
 };
 
 export type PostsDetails = {
@@ -40,7 +40,7 @@ export type PostsDetails = {
   content: string;
   createdAt: string;
   user: User;
-  likes: LikeDetails[];
+  likes: UserType[];
   comments: CommentDetails[];
   _count: {
     comments: number;
@@ -50,7 +50,7 @@ export type PostsDetails = {
 
 export type PostFooterDetails = {
   postId: number;
-  likes: LikeDetails[];
+  likes: UserType[];
   comments: CommentDetails[];
   counters: {
     comments: number;

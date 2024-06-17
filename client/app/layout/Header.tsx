@@ -5,10 +5,11 @@ import { Navbar, NavbarFlexContainer, AuthFullName, DropdownContainer } from "@/
 import { Button } from "@/utils/styles/forms/button";
 import { formatFullName } from "@/utils/helper";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "@/utils/context/AuthContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 function Header() {
-  const { user } = useAuthContext();
+  const { user } = useSelector((state:RootState) => state.user)
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   return (

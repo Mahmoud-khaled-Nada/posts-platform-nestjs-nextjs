@@ -11,10 +11,11 @@ import {
 import defaultUserAvatar from "@/__assets__/240_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
 import Image from "next/image";
 import { getNotificationQuery } from "@/services/queries";
-import { useAuthContext } from "@/utils/context/AuthContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 export const NotificationsList = () => {
-  const { user } = useAuthContext();
+  const { user } = useSelector((state:RootState) => state.user)
   const { data } = getNotificationQuery();
   return (
     <Notification>

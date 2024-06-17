@@ -9,7 +9,6 @@ import { setFriendRequests } from "@/store/friends/friendRequestSlice";
 import { setFriends } from "@/store/friends/friendSlice";
 import { FriendRequestDetails } from "@/utils/types";
 import { SidebarButton } from "./SidebarButton";
-import { useAuthContext } from "@/utils/context/AuthContext";
 
 type Props = {
   friendRequests: FriendRequestDetails[];
@@ -19,9 +18,10 @@ const SidebarTabsOptions: FC<Props> = ({ friendRequests }) => {
   const [addFriendRequest, setAddFriendRequest] = useState(false);
   const [activeTab, setActiveTab] = useState<"friends" | "friendRequest">("friendRequest");
 
+  const { user } = useSelector((state: RootState) => state.user);
+
   const dispatch = useDispatch<AppDispatch>();
 
-  const { user} = useAuthContext();
   const friends = useSelector((state: RootState) => state.friend.friends);
 
   const { data: friendRequest, isSuccess: isFriendRequestSuccess } = getFriendRequestsQuery();

@@ -4,9 +4,11 @@ import postsReducer from "./postSlice";
 import friendRequestReducer from "./friends/friendRequestSlice";
 import friendReducer from "./friends/friendSlice";
 import NotificationReducer from "./notifications";
+import userReducer from "./userSlice";
 
 export const store = configureStore({
   reducer: {
+    user: userReducer,
     posts: postsReducer,
     friendRequest: friendRequestReducer,
     friend: friendReducer,

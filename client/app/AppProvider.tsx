@@ -6,6 +6,7 @@ import { store } from "@/store";
 import { Provider as ReduxProvider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SocketProvider from "./utils/context/SocketContext";
 
 const AppProvider: FC<ChildrenType> = ({ children }) => {
   const queryClient = new QueryClient();

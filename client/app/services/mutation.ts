@@ -24,19 +24,20 @@ import {
   addFriendRequest,
   rejectFriendRequest,
 } from "@/store/friends/friendRequestSlice";
+import { setAuthUser } from "@/store/userSlice";
 
 //TODO: start functionality...
 
 export function loginMutation() {
+  const dispatch = useDispatch<AppDispatch>();
   return useMutation({
     mutationFn: (data: LoginParams) => {
       return postLoginUserAPI(data);
     },
-    onSuccess(res) {
-      if (res.data.access_token) {
-        Cookies.set("access_token", res.data.access_token, { expires: 1 });
-        location.replace("/");
-      }
+    onSuccess({data}) {
+      dispatch(setAuthUser(data.user))
+      Cookies.set("access_token", data.access_token, { expires: 1 });
+      location.replace('/')
     },
     onError: (err: AxiosError) => error("username or password is incorrect"),
   });

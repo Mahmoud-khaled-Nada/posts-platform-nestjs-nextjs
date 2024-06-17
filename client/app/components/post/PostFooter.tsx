@@ -6,15 +6,14 @@ import { RootState } from "@/store";
 import { PostFooterDetails } from "@/utils/types";
 import { FaHeart, FaComment } from "react-icons/fa";
 import { addLikeMutation } from "@/services/mutation";
-import { useAuthContext } from "@/utils/context/AuthContext";
 
 export const PostFooter: FC<PostFooterDetails> = ({ postId, likes, comments, counters }) => {
   const mutation = addLikeMutation();
 
   const [addComment, setAddComment] = useState(false);
-  const { user } = useAuthContext();
+  const { user } = useSelector((state:RootState) => state.user)
   const userLiked = () => {
-    if (likes) return likes.some((like) => like.user.id === user?.id);
+    if (likes) return likes.some((like) => like.user?.id === user?.id);
   };
 
   const [likeColor, setLikeColor] = useState<string>(userLiked() ? "red" : "");
