@@ -5,6 +5,7 @@ import friendRequestReducer from "./friends/friendRequestSlice";
 import friendReducer from "./friends/friendSlice";
 import NotificationReducer from "./notifications";
 import userReducer from "./userSlice";
+import tabsReducer from "./tabSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     friendRequest: friendRequestReducer,
     friend: friendReducer,
     notification: NotificationReducer,
+    tabs: tabsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   devTools: true,

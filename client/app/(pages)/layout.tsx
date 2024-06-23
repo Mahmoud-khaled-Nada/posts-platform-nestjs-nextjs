@@ -24,7 +24,7 @@ const PagesLayout: FC<ChildrenType> = ({ children }) => {
           <Column size={4}>
             <Sidebar />
           </Column>
-          <Column size={7}>
+          <Column size={8}>
             <MainContent>{children}</MainContent>
           </Column>
         </Row>

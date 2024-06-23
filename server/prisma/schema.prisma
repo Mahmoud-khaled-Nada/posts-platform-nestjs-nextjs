@@ -20,6 +20,7 @@ model User {
   sentFriends      Friends[]       @relation("FriendSender")
   likes            Like[]
   posts            Post[]
+  profile         Profile[]
 
   @@map("users")
 }
@@ -98,4 +99,16 @@ model Notification {
   createdAt      DateTime  @default(now()) @map("created_at")
 
   @@map("notifications")
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  userId Int     @map("user_id")
+  about  String? @default("")
+  avatar String? @default("")
+  banner String? @default("")
+  user   User    @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "profiles_user_id_fkey")
+  @@map("profiles")
 }

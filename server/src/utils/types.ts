@@ -4,22 +4,15 @@ import { Socket } from 'socket.io';
 
 import { Prisma } from '@prisma/client';
 
-
-
 export interface AuthenticatedRequest extends Request {
   user: User;
 }
-
-
-
-
 
 export interface AuthenticatedSocket extends Socket {
   socket: unknown;
   [x: string]: unknown;
   user?: User;
 }
-
 
 export type LoginParma = {
   username: string;
@@ -100,7 +93,6 @@ export type FriendParams = {
   receiverId: number;
 };
 
-
 export type NotificationType = {
   id: string;
   notifiableId: number;
@@ -111,3 +103,33 @@ export type NotificationType = {
 };
 
 
+// import * as multer from 'multer';
+
+// export type UserProfileFiles = Partial<{
+//   banner: multer.Multer.File[];
+//   avatar: multer.File[];
+// }>;
+
+// import { File as MulterFile } from 'multer';
+
+// export type UserProfileFiles = Partial<{
+//   banner: MulterFile[];
+//   avatar: MulterFile[];
+// }>;
+
+export type UserProfileFiles = Partial<{
+  banner: Express.Multer.File[];
+  avatar: Express.Multer.File[];
+}>;
+
+// export type UpdateUserProfileParams = Partial<{
+//   about: string;
+//   banner: MulterFile;
+//   avatar: MulterFile;
+// }>;
+
+export type UpdateUserProfileParams = Partial<{
+  about: string;
+  banner: Express.Multer.File;
+  avatar: Express.Multer.File;
+}>;

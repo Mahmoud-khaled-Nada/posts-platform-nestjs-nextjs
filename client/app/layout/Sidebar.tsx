@@ -1,23 +1,30 @@
 "use client";
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { FaUsers } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { NotificationsList } from "@/components/notifications/NotificationsList";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { SidebarContainer, SidebarContent, SidebarTabs, SidebarTab, IconBadge } from "@/utils/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import {
+  SidebarContainer,
+  SidebarContent,
+  SidebarTabs,
+  SidebarTab,
+  IconBadge,
+} from "@/utils/styles";
 import SidebarTabsOptions from "./sidebar-tabs/SidebarTabsOptions";
 import { getNotificationQuery } from "@/services/queries";
+import { setActiveTab } from "@/store/tabSlice";
 
 export const Sidebar: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"sidebar-tabs" | "notifications">("sidebar-tabs");
+  const { sidebarTabs, notificationsTab } = useSelector(
+    (state: RootState) => state.tabs
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleTabClick = useCallback((tab: "sidebar-tabs" | "notifications") => {
-    setActiveTab(tab);
-  }, []);
-
-  const friendRequests = useSelector((state: RootState) => state.friendRequest.friendRequests);
-  const { user } = useSelector((state:RootState) => state.user)
+  const friendRequests = useSelector(
+    (state: RootState) => state.friendRequest.friendRequests
+  );
 
   const friendNotificationCount = useMemo(() => {
     if (friendRequests.length > 0 && friendRequests.length <= 10) {
@@ -29,26 +36,41 @@ export const Sidebar: React.FC = () => {
     }
   }, [friendRequests]);
 
-  // improve this before
-  const { data } = getNotificationQuery();
+  const { data: notifications } = getNotificationQuery();
+
+  const notificationCount = useMemo(() => {
+    if (notifications && notifications.length > 0 && notifications.length <= 10) {
+      return <IconBadge>{notifications.length}</IconBadge>;
+    } else if (notifications && notifications.length > 10) {
+      return <IconBadge>10+</IconBadge>;
+    } else {
+      return null;
+    }
+  }, [notifications]);
+
   return (
     <SidebarContainer>
       <SidebarContent>
         <SidebarTabs>
-          <SidebarTab selected={activeTab === "sidebar-tabs"} onClick={() => handleTabClick("sidebar-tabs")}>
+          <SidebarTab
+            selected={sidebarTabs === "sidebar-tabs"}
+            onClick={() => dispatch(setActiveTab("sidebar-tabs"))}
+          >
             <FaUsers />
             {friendNotificationCount}
           </SidebarTab>
           <SidebarTab
-            selected={activeTab === "notifications"}
-            onClick={() => handleTabClick("notifications")}
+            selected={notificationsTab === "notifications"}
+            onClick={() => dispatch(setActiveTab("notifications"))}
           >
             <IoMdNotifications />
-            <IconBadge>{data && data.length > 0 && data.length < 10 ? data.length : "10+"}</IconBadge>
+            {notificationCount}
           </SidebarTab>
         </SidebarTabs>
-        {activeTab === "sidebar-tabs" && <SidebarTabsOptions friendRequests={friendRequests || []} />}
-        {activeTab === "notifications" && <NotificationsList />}
+        {sidebarTabs === "sidebar-tabs" && (
+          <SidebarTabsOptions friendRequests={friendRequests || []} />
+        )}
+        {notificationsTab === "notifications" && <NotificationsList />}
       </SidebarContent>
     </SidebarContainer>
   );

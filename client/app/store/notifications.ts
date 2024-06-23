@@ -1,5 +1,3 @@
-//
-
 import { NotificationState } from "@/utils/types";
 import { createSlice } from "@reduxjs/toolkit";
 

@@ -37,6 +37,10 @@ client.interceptors.request.use(
 export const postLoginUserAPI = (data: LoginParams) => client.post("/auth/login", data);
 
 export const authUserAPI = () => client.get<User>("/users/me");
+export const UserProfileAPI = (data: FormData) =>
+  client.patch<User>("/users/profiles", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
 export const createPostAPI = (data: PostParams) => client.post("/posts/create", data);
 export const getPostsAPI = () => client.get<PostsDetails[]>("/posts");

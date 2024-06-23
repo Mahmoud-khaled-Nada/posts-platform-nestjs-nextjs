@@ -1,3 +1,5 @@
+import { MulterField } from "@nestjs/platform-express/multer/interfaces/multer-options.interface";
+
 export enum Routes {
   AUTH = 'auth',
   USERS = 'users',
@@ -35,3 +37,16 @@ export enum WebsocketEvents {
   VOICE_CALL_HANG_UP = 'onVoiceCallHangUp',
   VOICE_CALL_REJECTED = 'onVoiceCallRejected',
 }
+
+
+
+export const UserProfileFileFields: MulterField[] = [
+  {
+    name: 'banner',
+    maxCount: 1,
+  },
+  {
+    name: 'avatar',
+    maxCount: 1,
+  },
+];
