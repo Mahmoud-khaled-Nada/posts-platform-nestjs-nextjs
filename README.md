@@ -1,2 +1,2 @@
-![Screenshot 2024-06-11 235529](https://github.com/Mahmoud-khaled-Nada/Mahmoud-khaled-Nada-posts-and-friends-real-time-nextjs-nestjs/assets/125180279/76471451-05e6-40ae-b84d-03538eee5bed)
-![Screenshot_11-6-2024_235412_localhost](https://github.com/Mahmoud-khaled-Nada/Mahmoud-khaled-Nada-posts-and-friends-real-time-nextjs-nestjs/assets/125180279/ac86ed69-913e-4997-bbe4-d9ae539270fe)
+![Screenshot_10-8-2024_14335_localhost](https://github.com/user-attachments/assets/e284ac7a-ebc6-4607-93ed-38bd00894232)
+![Screenshot_10-8-2024_14350_localhost](https://github.com/user-attachments/assets/abc9d23f-4054-40c7-8f72-9b558bf1cb7a)
