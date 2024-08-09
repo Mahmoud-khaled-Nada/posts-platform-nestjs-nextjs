@@ -20,7 +20,7 @@ model User {
   sentFriends      Friends[]       @relation("FriendSender")
   likes            Like[]
   posts            Post[]
-  profile         Profile[]
+  profile          Profile[]
 
   @@map("users")
 }

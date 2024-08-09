@@ -146,3 +146,14 @@ export type UserBannerProps = {
   backgroundUrl: string;
   // backgroundColor: string;
 };
+
+
+export type CharacterLimitProps = {
+  atMaxLength: boolean;
+};
+
+
+
+export type MessageInputContainerProps = {
+  isMultiLine: boolean;
+};

@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import { FaUsers } from "react-icons/fa";
-import { IoMdNotifications } from "react-icons/io";
+import { IoMdNotifications, IoIosChatbubbles } from "react-icons/io";
 import { NotificationsList } from "@/components/notifications/NotificationsList";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
@@ -15,11 +15,10 @@ import {
 import SidebarTabsOptions from "./sidebar-tabs/SidebarTabsOptions";
 import { getNotificationQuery } from "@/services/queries";
 import { setActiveTab } from "@/store/tabSlice";
+import { ConversationMenu } from "@/components/chat/ConversationMenu";
 
 export const Sidebar: React.FC = () => {
-  const { sidebarTabs, notificationsTab } = useSelector(
-    (state: RootState) => state.tabs
-  );
+  const { sidebarTabs, notificationsTab, chatTab } = useSelector((state: RootState) => state.tabs);
   const dispatch = useDispatch<AppDispatch>();
 
   const friendRequests = useSelector(
@@ -66,11 +65,16 @@ export const Sidebar: React.FC = () => {
             <IoMdNotifications />
             {notificationCount}
           </SidebarTab>
+          <SidebarTab
+            selected={chatTab === "chat"}
+            onClick={() => dispatch(setActiveTab("chat"))}
+          >
+            <IoIosChatbubbles />
+          </SidebarTab>
         </SidebarTabs>
-        {sidebarTabs === "sidebar-tabs" && (
-          <SidebarTabsOptions friendRequests={friendRequests || []} />
-        )}
+        {sidebarTabs === "sidebar-tabs" && (<SidebarTabsOptions friendRequests={friendRequests || []} />)}
         {notificationsTab === "notifications" && <NotificationsList />}
+        {chatTab === "chat" && <ConversationMenu />}
       </SidebarContent>
     </SidebarContainer>
   );

@@ -1,7 +1,7 @@
 "use client"
 import styled from "styled-components";
 import colors from "./colors";
-import { NotificationsListItemPrpos, SidebarTabPrpos } from "../types";
+import { CharacterLimitProps, MessageInputContainerProps, NotificationsListItemPrpos, SidebarTabPrpos } from "../types";
 
 export const Navbar = styled.div`
   position: fixed;
@@ -42,24 +42,23 @@ export const DropdownContainer = styled.div`
 `;
 
 // End Navbar ....
-
 export const MainContent = styled.div`
-  width: 100%;
-  margin-top: 10%;
+    width: 90%;
+    margin: 95px 40px;
 `;
 
 // Sidebar container styling
 export const SidebarContainer = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #004;
+  background-color: #202225;
   position: relative;
 `;
 
 // Common sidebar content styling
 export const SidebarContent = styled.div`
   position: fixed;
-  width: 33%;
+  width: 32.5%;
   height: 100vh;
   overflow-y: auto;
   border-right: 1px solid #202225;
@@ -488,4 +487,61 @@ export const FriendRequestItem = styled.div`
     flex-direction: row;
     gap: 0.5rem;
   }
+`;
+
+
+
+export const FlexMenuContainer = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+
+  @media (min-width: 640px) {
+    padding-bottom: 1rem;
+  }
+`;
+
+// List item content container styling
+export const FlexItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+`;
+
+
+export const LastMessage = styled.div`
+    font-size: 10px;
+    color: #eee;
+`
+
+
+export const CharacterLimit = styled.span<CharacterLimitProps>`
+  position: absolute;
+  bottom: 8px;
+  right: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ atMaxLength }) =>
+    atMaxLength ? '#ff0000' : 'rgb(129, 129, 129)'};
+`;
+
+
+export const MessageInputContainer = styled.div<MessageInputContainerProps>`
+  box-sizing: border-box;
+  background-color: ${({ theme }) =>
+    theme.messagePanel.inputContainer.backgroundColor};
+  border-radius: 5px;
+  width: 100%;
+  padding: 18px 32px;
+  display: flex;
+  gap: 20px;
+  align-items: ${({ isMultiLine }) => (isMultiLine ? 'top' : 'center')};
+  position: relative;
 `;
